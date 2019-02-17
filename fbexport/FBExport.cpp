@@ -54,6 +54,7 @@
 
 #include <string>
 #include <cstring>
+#include <sstream>
 
 #include "ParseArgs.h"
 #include "FBExport.h"
@@ -310,7 +311,7 @@ string FBExport::CreateHumanString(IBPP::Statement& st, int col)
         case IBPP::sdInteger:
         case IBPP::sdSmallint:
             st->Get(col, &x);
-            sprintf(str, "%ld", x);
+            sprintf(str, "%i", x);
             value = str;
             numeric = true;
             scaleInt(value, st->ColumnScale(col));   // scaled integer
@@ -356,34 +357,38 @@ string FBExport::CreateHumanString(IBPP::Statement& st, int col)
     if (ar->ExportFormat == xefCSV)         // CVS format, each field's value is quoted
     {
         // escape quotes with two quotes " => ""
-        string::size_type pos = string::npos;
-        while (true)
-        {
-            pos = value.find_last_of('"', pos);
-            if (pos == string::npos)
-                break;
-            value.insert(pos, 1, '"');
-            if (pos == 0)
-                break;
-            pos--;
+
+        stringstream stringBuilder;
+        stringBuilder << '"';
+        for (int i=0; i<value.size(); i++) {
+            char next_char = value.c_str()[i];
+            if(next_char == '"') {
+                stringBuilder << """";
+            } else if (next_char == '\0') {
+            } else {
+                stringBuilder << next_char;
+            }
         }
-        value = "\"" + value + "\"";        // except those which are NULL
+        stringBuilder << '"';
+        return stringBuilder.str();
     }
 
     if (ar->ExportFormat == xefInserts && !numeric)
     {
-        string::size_type pos = string::npos;
-        while (true)
-        {
-            pos = value.find_last_of('\'', pos);
-            if (pos == string::npos)
-                break;
-            value.insert(pos, 1, '\'');
-            if (pos == 0)
-                break;
-            pos--;
+        stringstream stringBuilder;
+        stringBuilder << '\'';
+        for (int i=0; i<value.size(); i++) {
+            char next_char = value.c_str()[i];
+            if(next_char == '\'') {
+                stringBuilder << "''";
+            } else if (next_char == '\0') {
+                //stringBuilder << "' || x'00' || '";
+            } else {
+                stringBuilder << next_char;
+            }
         }
-        value = "'" + value + "'";      // INSERTs, use single quotes for non-numeric values
+        stringBuilder << '\'';
+        return stringBuilder.str();
     }
 
     return value;
@@ -1071,6 +1076,8 @@ int FBExport::Init(Arguments *a)
                     // create SQL (select + list + where clause)
                     ar->SQL = "SELECT " + colist + " FROM " + ar->VerbatimCopyTable + " " + ar->SQL;
                     Printf("SQL: %s\n", ar->SQL.c_str());
+                } else {
+                    Printf("-V or -Q option must be specified for selecting data\n");
                 }
 
                 Printf("Prepare statement...");
