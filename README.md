@@ -23,3 +23,7 @@ automatically loads tables and compares their fields
 uses Foreign Keys and Checks to determine the correct order of tables
 can create ALTER TABLE and CREATE TABLE scripts needed to update the destination database
 HTML overview of differences in data and metadata
+
+
+To build
+docker build .
