@@ -26,4 +26,6 @@ HTML overview of differences in data and metadata
 
 
 To build
+```bash
 docker build .
+```
