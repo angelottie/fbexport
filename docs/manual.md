@@ -13,13 +13,13 @@ FBExport manual
   * import data from .fbx file to database
   * execute sql statement
   * show list of connected users
-* Advanced usage  
+## Advanced usage  
 
   * pump data from one to other database
   * updating instead of inserting
   * running large SQL scripts  
 
-* Other formats
+## Other formats
 
   * export as CSV
   * export as insert statements
