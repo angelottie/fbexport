@@ -7,7 +7,7 @@ FBExport manual
 
   
 
-* Basic usage
+## Basic usage
 
   * export data from database to .fbx file
   * import data from .fbx file to database
