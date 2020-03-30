@@ -16,6 +16,8 @@ id=$(docker run -d --mount type=bind,source=/tmp/databases.conf,target=/etc/fire
 echo "${id}"
 
 sleep 5
+
+# Expect a client to be able to connect through the network and list the tables.
 docker run --entrypoint=/bin/bash firebird:3.0 -c \
     "echo show tables\; | ISC_USER=machine ISC_PASSWORD=admin isql-fb host.docker.internal:demo-1"
 

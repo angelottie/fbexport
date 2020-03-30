@@ -1,0 +1,11 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--tag=firebird:3.0', '--tag=gcr.io/$PROJECT_ID/firebird:3.0', '-f', 'Dockerfile.fb-3.0', '.']
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--tag=firebird:2.5', '--tag=gcr.io/$PROJECT_ID/firebird:2.5', '-f', 'Dockerfile.fb-2.5', '.']
+
+images:
+- 'gcr.io/$PROJECT_ID/firebird:3.0'
+- 'gcr.io/$PROJECT_ID/firebird:2.5'
+
