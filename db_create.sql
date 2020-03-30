@@ -1,10 +1,8 @@
 SET SQL DIALECT 3; 
 
 CREATE DATABASE
-    '/var/lib/firebird/3.0/data/28dc98d6-4df0-5e57-bf3b-ea36413990b3.fdb'
+    '${DB_DIR}/${FIREBIRD_DATABASE}.fdb'
     PAGE_SIZE 8192
     DEFAULT CHARACTER SET UTF8;
-
-CREATE USER machine PASSWORD '28dc98d6-4df0-5e57-bf3b-ea36413990b3';
 
 COMMIT;
