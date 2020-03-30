@@ -19,7 +19,7 @@ function database_init() {
     cat "${INIT_DIR}/db_create.sql" | envsubst | isql-fb
 
     for filename in ${GENERATED_FILES[@]}; do
-        isql-fb -i "${GEN_CONF_DIR}/${filename}" "${DB_DIR}/${FIREBIRD_DATABASE}.fdb"
+        isql-fb -i "${INIT_GEN_DIR}/${filename}" "${DB_DIR}/${FIREBIRD_DATABASE}.fdb"
     done
 
     isql-fb -i "${INIT_DIR}/db_auth.sql" "${DB_DIR}/${FIREBIRD_DATABASE}.fdb"
