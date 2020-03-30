@@ -30,3 +30,19 @@ Export client data
 docker build --build-arg DATEBASE_NAME_ARG=DATABASE_NAME.FDB -t firebirdexport -f Dockerfile.init .   
 docker run -v DATABASE_PATH:/var/lib/firebird/2.5/data firebirdexport
 ```
+
+## Development (blp-digital)
+
+The test and deploy process is manual at the moment since we do not antecipate frequent changes.
+
+Test:
+
+```bash
+bash -x integration_test.sh
+```
+
+Build and publish:
+
+```bash
+gcloud builds submit --config cloudbuild.yaml .
+```
