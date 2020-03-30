@@ -23,6 +23,8 @@ RUN apt-get install -y gettext
 
 # Load data to init empty db with meta
 RUN mkdir -p /etc/firebird/3.0/init
+RUN mkdir -p /etc/firebird/3.0/conf.d
+
 ADD tables.conf /etc/firebird/3.0/init
 ADD db_create.sql /etc/firebird/3.0/init
 ADD db_meta.sql /etc/firebird/3.0/init

@@ -11,7 +11,7 @@ EOF
 
 docker rm -f firebird-ut
 
-id=$(docker run -d --mount type=bind,source=/tmp/databases.conf,target=/etc/firebird/3.0/init/databases.conf \
+id=$(docker run -d --mount type=bind,source=/tmp/databases.conf,target=/etc/firebird/3.0/conf.d/databases.conf \
     -p 3050:3050 -e FIREBIRD_PASSWORD=admin --name firebird-ut firebird:3.0)
 echo "${id}"
 
