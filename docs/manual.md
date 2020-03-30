@@ -7,26 +7,26 @@ FBExport manual
 
   
 
-* Basic usage
+## Basic usage
 
   * export data from database to .fbx file
   * import data from .fbx file to database
   * execute sql statement
   * show list of connected users
-* Advanced usage  
+## Advanced usage  
 
   * pump data from one to other database
   * updating instead of inserting
   * running large SQL scripts  
 
-* Other formats
+## Other formats
 
   * export as CSV
   * export as insert statements
   * formatting date and time values  
 
   
-Basic usage
+## Basic usage
 
   
 All examples use local server and database located at c:\dbases\test.gdb.
@@ -39,7 +39,7 @@ but they are for the same reason.
   
   
 
-Exporting data from table "mytable" to file "myfile.fbx"
+### Exporting data from table "mytable" to file "myfile.fbx"
 
   
 
@@ -74,7 +74,7 @@ easiest option is to use -V switch. FBExport will build the list of column in
 alphabetical order so you don't have to worry about it
 
   
-Using verbatim copy options
+### Using verbatim copy options
 
   
 
@@ -100,7 +100,7 @@ and it may look ugly.
   
   
 
-Import data from file "myfile.fbx"&nbsp_place_holder; to table "mytable"
+### Import data from file "myfile.fbx"&nbsp_place_holder; to table "mytable"
 
   
 
@@ -138,7 +138,7 @@ number of errors, use value -1 (-E -1).
 
   
 
-Executing SQL statement
+### Executing SQL statement
 
   
 
@@ -162,7 +162,7 @@ fbexport -X -F script.sql -D c:\dbases\test.gdb -U sysdba -P masterkey -Q
   
   
 
-Show list of connected users
+### Show list of connected users
 
   
 
@@ -175,12 +175,12 @@ Classic server. It just lists names of users that are connected to database.
   
 
   
-Advanced usage
+## Advanced usage
 
   
   
 
-Pump data from one to other database
+### Pump data from one to other database
 
   
 You can pump data with fbexport between two databases by exporting and
@@ -209,7 +209,7 @@ fbexport -S -V mytable -D db1.gdb -H server1 -P masterkey -F - | fbexport -I
 
   
 
-Updating instead of inserting
+### Updating instead of inserting
 
   
 From version 1.55, FBExport supports ordered parameters which can be directly
@@ -287,7 +287,7 @@ fbexport -X -D c:\dbases\test2.gdb -P masterkey -F script.sql -C 2000 -M
 
   
   
-Other formats
+## Other formats
 
   
 Besides [default .fbx format](FBExport_file_format.html), data can be exported
