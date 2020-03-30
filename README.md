@@ -25,7 +25,8 @@ can create ALTER TABLE and CREATE TABLE scripts needed to update the destination
 HTML overview of differences in data and metadata
 
 
-To build
-```bash
-docker build .
+Export client data
+```
+docker build --build-arg DATEBASE_NAME_ARG=DATABASE_NAME.FDB -t firebirdexport -f Dockerfile.init .   
+docker run -v DATABASE_PATH:/var/lib/firebird/2.5/data firebirdexport
 ```

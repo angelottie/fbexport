@@ -1,0 +1,22 @@
+FROM ubuntu:16.04
+
+RUN apt-get update
+
+RUN apt-get install -y g++ make libfbclient2
+
+COPY . /build/fbexport
+WORKDIR /build/fbexport
+RUN make LIBEFBCLIENT=libfbclient.so.2.5.4
+RUN cp exe/fbexport /usr/local/bin
+RUN cp exe/fbcopy /usr/local/bin
+
+RUN apt-get install -y firebird2.5-superclassic
+COPY export.sh /usr/local/bin/export.sh
+RUN chmod 777 /usr/local/bin/export.sh
+
+ARG DATEBASE_NAME_ARG
+ENV DATABASE_NAME ${DATEBASE_NAME_ARG} 
+
+ENV MOUNTED_DIR "/var/lib/firebird/2.5/data"
+
+# ENTRYPOINT ["/usr/local/bin/export.sh"]
