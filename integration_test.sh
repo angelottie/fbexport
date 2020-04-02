@@ -16,7 +16,7 @@ id=$(docker run -d --mount type=bind,source=/tmp/databases.conf,target=/etc/fire
     -p 3050:3050 -e FIREBIRD_PASSWORD=admin --name firebird-ut firebird:3.0)
 echo "${id}"
 
-sleep 10
+sleep 60
 
 SCRIPT=$(
     cat <<"EOF"

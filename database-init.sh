@@ -28,8 +28,16 @@ function database_init() {
 
     cat "${INIT_DIR}/db_create.sql" | envsubst | isql-fb -q
 
+     # TODO: move this step to metadata extraction
+    sed -i -e "s/SUB_TYPE BLR/SUB_TYPE BINARY/g" ${DATA_DIR}/${FIREBIRD_DATABASE}/db_meta.sql
+
+    mkdir -p "${INIT_GEN_DIR}/${FIREBIRD_DATABASE}"
+    # Generate schema specific to db
+    echo ${TABLE_NAMES[*]} | xargs -n 1 | xargs -I{} awk '/CREATE TABLE {} \(/,/^$/' ${DATA_DIR}/${FIREBIRD_DATABASE}/db_meta.sql >>${INIT_GEN_DIR}/${FIREBIRD_DATABASE}/db_create_tables.sql
+    echo ${TABLE_NAMES[*]} | xargs -n 1 | xargs -I{} awk '/CREATE INDEX [^ ]+ ON {} /' ${DATA_DIR}/${FIREBIRD_DATABASE}/db_meta.sql >>${INIT_GEN_DIR}/${FIREBIRD_DATABASE}/db_create_index.sql
+
     for filename in ${GENERATED_FILES[@]}; do
-        isql-fb -i "${INIT_GEN_DIR}/${filename}" "${DB_DIR}/${FIREBIRD_DATABASE}.fdb"
+        isql-fb -i "${INIT_GEN_DIR}/${FIREBIRD_DATABASE}/${filename}" "${DB_DIR}/${FIREBIRD_DATABASE}.fdb"
     done
 
     isql-fb -i "${INIT_DIR}/db_auth.sql" "${DB_DIR}/${FIREBIRD_DATABASE}.fdb"
@@ -39,4 +47,3 @@ function database_init() {
         load_data "${FIREBIRD_DATABASE}"
     fi
 }
-
