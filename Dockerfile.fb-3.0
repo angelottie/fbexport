@@ -27,7 +27,6 @@ RUN mkdir -p /etc/firebird/3.0/conf.d
 
 ADD tables.conf /etc/firebird/3.0/init
 ADD db_create.sql /etc/firebird/3.0/init
-ADD db_meta.sql /etc/firebird/3.0/init
 ADD db_auth.sql /etc/firebird/3.0/init
 
 # Create database
