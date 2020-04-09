@@ -27,8 +27,8 @@ HTML overview of differences in data and metadata
 
 Export client data
 ```
-docker build --build-arg DATEBASE_NAME_ARG=DATABASE_NAME.FDB -t firebirdexport -f Dockerfile.init .   
-docker run -v DATABASE_PATH:/var/lib/firebird/2.5/data firebirdexport
+docker build --build-arg DATEBASE_NAME_ARG=DATABASE_NAME.FDB -t firebirdexport -f Dockerfile.fb-3.0 .   
+docker run -v DATABASE_PATH:/var/lib/firebird/2.5/data -it --entrypoint /bin/bash firebirdexport
 ```
 
 ## Development (blp-digital)
