@@ -14,6 +14,8 @@ RUN apt-get install -y firebird2.5-superclassic
 COPY export.sh /usr/local/bin/export.sh
 RUN chmod 777 /usr/local/bin/export.sh
 
+COPY tables.conf /usr/local/bin/
+
 ARG DATEBASE_NAME_ARG
 ENV DATABASE_NAME ${DATEBASE_NAME_ARG} 
 
