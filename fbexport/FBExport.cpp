@@ -363,7 +363,7 @@ string FBExport::CreateHumanString(IBPP::Statement& st, int col)
         for (int i=0; i<value.size(); i++) {
             char next_char = value.c_str()[i];
             if(next_char == '"') {
-                stringBuilder << """";
+                stringBuilder << "\"\"";
             } else if (next_char == '\0') {
             } else {
                 stringBuilder << next_char;
