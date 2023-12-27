@@ -11,5 +11,5 @@ if [ -f "/usr/local/bin/tables.conf" ]; then
 fi
 
 for tablename in ${TABLE_NAMES[@]}; do
-    fbexport -S -H "" -D "${MOUNTED_DIR}/${DATABASE_NAME}" -U sysdba -P masterkey -F "${MOUNTED_DIR}/${tablename}.fbx" -V ${tablename}
+    fbexport -Sc -H "" -D "${MOUNTED_DIR}/${DATABASE_NAME}" -U sysdba -P masterkey -F "${MOUNTED_DIR}/${tablename}.csv" -V ${tablename}
 done
